@@ -1,26 +1,79 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { dataAgent, dataClubs, dataCoaches, dataPlayers, dataReferrees } from './Components/const/const';
+import Header from './Components/Header/Header';
+import getData from './Components/Api/football.api';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+interface AppState {
+  inputValue: string;
+  playersList: dataPlayers[];
+  clubsList: dataClubs[];
+  coachesList: dataCoaches[];
+  agentsList: dataAgent[];
+  refereesList: dataReferrees[];
+}
+class App extends Component {
+  state = {
+    inputValue: '',
+    playersList: [],
+    clubsList: [],
+    coachesList: [],
+    agentsList: [],
+    refereesList: [],
+  } as AppState;
+  
+  searchRef = React.createRef<HTMLInputElement>();
+
+  updateInputValue = (e: any) => {
+    this.setState({
+      ...this.state,
+      inputValue: e.target.value,
+    })
+  }
+
+  handleSearch = () => {
+    getData(this.state.inputValue)
+    .then((data: any) => {
+      console.log(data);
+      this.setState({
+        ...this.state,
+        playersList: data?.players,
+        clubsList: data?.clubs,
+        coachesList: data?.coaches,
+        agentsList: data?.agents,
+        refereesList: data?.referees,
+      }, () => {
+        this.resetSearch();
+      })
+    });
+  }
+
+  resetSearch = () => {
+    this.setState({
+      ...this.state,
+      inputValue: '',
+    }, () => {
+      this.searchRef.current?.focus();
+    })
+  }
+
+  render(){
+    return (
+      <div>
+        <Header />
+        <input
+          ref={this.searchRef}
+          value={this.state.inputValue}
+          onChange={this.updateInputValue}
+        />
+        <button
+          onClick={this.handleSearch}
+          type="button"
         >
-          Learn React
-        </a>
-      </header>
+          Search
+        </button>
     </div>
-  );
+  )
+  }
 }
 
 export default App;
