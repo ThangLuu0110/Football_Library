@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { dataAgent, dataClubs, dataCoaches, dataPlayers, dataReferrees } from './Components/const/const';
 import Header from './Components/Header/Header';
+import SearchPart from './Components/Header/SearchPart';
 import getData from './Components/Api/football.api';
 
 interface AppState {
@@ -60,6 +61,7 @@ class App extends Component {
     return (
       <div>
         <Header />
+        <SearchPart />
         <input
           ref={this.searchRef}
           value={this.state.inputValue}
