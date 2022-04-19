@@ -1,0 +1,23 @@
+//Color
+$main-color: #7e0830;
+$semi-color: #f1e7dd;
+
+*{
+    box-sizing: inherit;
+}
+
+ul{
+    padding: 0;
+    margin: 0;
+}
+
+li{
+    list-style: none;
+}
+
+html{
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}

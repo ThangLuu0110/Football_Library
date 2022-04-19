@@ -1,4 +1,6 @@
 export default function getData(value: string){
+    console.log('loading');
+    
     const options = {
       method: 'GET',
       headers: {
@@ -8,5 +10,5 @@ export default function getData(value: string){
     };
     
     return fetch(`https://transfermarket.p.rapidapi.com/search?query=${value}`, options)
-      .then(response => response.json())
+      .then(response =>response.json())
 }
