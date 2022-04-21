@@ -1,6 +1,4 @@
 export default function getData(value: string){
-    console.log('loading');
-    
     const options = {
       method: 'GET',
       headers: {

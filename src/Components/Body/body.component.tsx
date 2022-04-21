@@ -1,26 +1,25 @@
 import React, { Component } from 'react';
+import Loading from '../Adding/loading';
 import getData from '../Api/football.api';
 import { 
-    count,
-    dataAgent, 
-    dataClubs, 
-    dataCoaches, 
-    dataCompetitions, 
-    dataPlayers, 
-    dataReferrees 
+    DataClubs, 
+    DataCoaches, 
+    DataCompetitions, 
+    DataPlayers, 
+    DataReferrees 
 } from '../const/const';
 import DataTable from './datatable';
 import SearchPart from './SearchPart';
 
 interface BodyState{
     inputValue: string;
-    playersList: dataPlayers[];
-    clubsList: dataClubs[];
-    coachesList: dataCoaches[];
-    agentsList: dataAgent[];
-    refereesList: dataReferrees[];
-    competitionsList: dataCompetitions[];
-    count: count[];
+    playersList: DataPlayers[];
+    clubsList: DataClubs[];
+    coachesList: DataCoaches[];
+    refereesList: DataReferrees[];
+    competitionsList: DataCompetitions[];
+    isShow: boolean;
+    isLoading: boolean;
 }
 
 export default class Body extends Component {
@@ -29,46 +28,63 @@ export default class Body extends Component {
         playersList: [],
         clubsList: [],
         coachesList: [],
-        agentsList: [],
         refereesList: [],
         competitionsList: [],
-        count: [],
+        isShow: false,
+        isLoading: false,
       } as BodyState;
 
-      updateInputValue = (e: any) => {
+      updateInputValue: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         this.setState({
           ...this.state,
           inputValue: e.target.value,
         })
       }
     
-      handleSearch = () => {
+      handleSearch: React.MouseEventHandler<HTMLButtonElement> = () => {
         if(this.state.inputValue === ''){
+            this.setState({
+                ...this.state,
+                isShow: false,
+            })
             alert('Please enter');
         }else{
-            getData(this.state.inputValue)
-            .then((data: any) => {
-              this.setState({
+            this.setState({
                 ...this.state,
-                playersList: data?.players,
-                clubsList: data?.clubs,
-                coachesList: data?.coaches,
-                agentsList: data?.agents,
-                refereesList: data?.referees,
-                competitionsList: data?.competitions,
-                count: data?.count,
-              }, () => {
-                  console.log('stop loading');
-                  this.checkCount(data);
-              })
-            });
+                isLoading: true,
+            }, () => {
+                getData(this.state.inputValue)
+                .then((data: any) => {
+                  this.setState({
+                    ...this.state,
+                    playersList: data?.players || [],
+                    clubsList: data?.clubs || [],
+                    coachesList: data?.coaches || [],
+                    refereesList: data?.referees || [],
+                    competitionsList: data?.competitions || [],
+                  }, () => {
+                      this.setState({
+                          ...this.state,
+                          isLoading: false,
+                      });
+                      console.log('stop loading');
+                      this.checkCount(data);
+                    })
+                });
+            })
         }
       }
       
       checkCount(data: any){
-          if(!data.clubs && !data.players && !data.competitions && !data.agents && !data.coaches && !data.referees){
+          if(!data.clubs && !data.players && !data.competitions && !data.coaches && !data.referees){
               alert('No results');
-          }  
+          }
+          else{
+              this.setState({
+                  ...this.state,
+                  isShow: true,
+              })
+          }
       }
 
       resetSearch = () => {
@@ -86,14 +102,19 @@ export default class Body extends Component {
                     updateValue={this.updateInputValue}
                     handleSearch={this.handleSearch}
                 />
-                <DataTable 
+                {
+                    this.state.isShow &&
+                    <DataTable 
                     playersList={this.state.playersList}
                     clubsList={this.state.clubsList}
-                    agentsList={this.state.agentsList}
                     refereesList={this.state.refereesList}
                     coachesList={this.state.coachesList}
                     competitionsList={this.state.competitionsList}
-                />
+                    />
+                }
+                {
+                    this.state.isLoading === true && <Loading />
+                }
             </div>
         )
     }

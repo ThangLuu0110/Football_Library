@@ -1,42 +1,32 @@
-export interface dataPlayers{
+export interface DataPlayers{
     id: number;
     playerName: string;
+    club: string;
+    playerImage: string;
   }
-  
-export interface dataClubs{
-  id: number;
-  league: string;
+export interface DataClubs{
+  id: string;
   competitionName: string;
   name: string;
+  logoImage: string;
 }
-
-export interface dataAgent{
-  id: number;
-  companyName: string;
-}
-
-export  interface dataCoaches{
-  id: number;
+export  interface DataCoaches{
+  id: string;
   coachName: string;
   currentFunction: string;
+  coachImage: string
 }
 
-export interface dataReferrees{
-  id: number;
+export interface DataReferrees{
+  id: string;
   club: string;
   refereeName: string;
+  refereeImage: string;
 }
 
-export interface dataCompetitions{
+export interface DataCompetitions{
   id: string;
   competitionName: string;
   country: string;
-}
-
-export interface count{
-  clubs: number;
-  coaches: number;
-  competitions: number;
-  players: number;
-  referees: number;
+  competitionImage: string;
 }

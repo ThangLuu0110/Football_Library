@@ -12,15 +12,22 @@ export default function SearchPart({ value, updateValue, handleSearch}: searchPa
 
     const handleSearchValue = () => {
         handleSearch();
-        searchRef.current?.focus();
+    }
+
+    const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+        if(e.which === 13){
+            handleSearch();
+        }
     }
 
     return (
         <div className="body__search">
             <input
+                placeholder="Search..."
                 className="body__search-input"
                 value={value} 
                 onChange={updateValue}
+                onKeyDown={handleKeyDown}
                 ref={searchRef}
                 type="search"
             />
