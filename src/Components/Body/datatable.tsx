@@ -6,6 +6,8 @@ import { BsFillPeopleFill, BsGear } from 'react-icons/bs';
 import { MdManageAccounts } from 'react-icons/md';
 import DatatableContent from './datatable_content';
 import SettingBox from '../Adding/settings_box';
+import Counting from '../Adding/counting';
+
 
 interface datatableProps{
     playersList: Array<any>;
@@ -82,6 +84,7 @@ export default function DataTable({
                         <span className="text">
                             All 
                         </span>
+                        <Counting length={allList.length}/>
                     </li>
                     {   
                         showCompetitionsTab && 
@@ -96,6 +99,7 @@ export default function DataTable({
                             <span className="text">
                                 Competitions 
                             </span>
+                            <Counting length={competitionsList.length}/>
                         </li>
                     }
                     {
@@ -110,6 +114,7 @@ export default function DataTable({
                             <span className="text">
                                 Clubs 
                             </span>
+                            <Counting length={clubsList.length}/>
                         </li>
                     }
                     {
@@ -123,6 +128,7 @@ export default function DataTable({
                             <span className="text">
                                 Players 
                             </span>
+                            <Counting length={playersList.length}/>
                         </li>
                     }
                     {
@@ -136,6 +142,7 @@ export default function DataTable({
                             <span className="text">
                                 Coaches 
                             </span>
+                            <Counting length={coachesList.length}/>
                         </li>
                     }
                     {
@@ -149,6 +156,7 @@ export default function DataTable({
                             <span className="text">
                                 Referees 
                             </span>
+                            <Counting length={refereesList.length}/>
                         </li>
                     }
                 </ul>

@@ -25,7 +25,7 @@ export default function SettingBox({
     setCoachesTab,
     setRefereesTab
 } : SettingBoxProps){
-
+    
     return (
         <div className="setting-box">
             <ul className="setting-box__list">

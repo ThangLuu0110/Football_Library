@@ -1,9 +1,51 @@
 .body{
     width: 80%;
+    min-height: 0rem;
     padding: 2rem;
     background-color: #fff;
     border-radius: 1rem;
     transition: height 1s ease;
+
+    &__loading{
+        width: 100%;
+        height: 20rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .loading__spinner{
+            position: relative;
+            width: 5rem;
+            height: 5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 7px solid $main-color;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation-name: loadingSpin;
+            animation-duration: 1000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear; 
+    
+            &-ball{
+                position: absolute;
+                width: 2.5rem;
+                height: 2.5rem;
+                background-color: $main-color;
+                border-radius: 50%;
+            }
+        }
+    
+        @keyframes loadingSpin {
+            from{
+              transform: rotate(0deg);
+            }
+            to {
+              transform: rotate(360deg);
+            }
+        }
+    }
 
     &__search{
         display: flex;
@@ -46,7 +88,28 @@
             position: relative;
             
             &-list{
+                height: 5rem;
+                width: 90%;
                 display: flex;
+                overflow: auto;
+                white-space: nowrap;
+
+                &::-webkit-scrollbar-track{
+                    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+                    border-radius: 10px;
+                    background-color: #F5F5F5;
+                }
+
+                &::-webkit-scrollbar{
+                    height: 0.5rem;
+                    background-color: #F5F5F5;
+                }
+
+                &::-webkit-scrollbar-thumb{
+                    border-radius: 10px;
+                    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+                    background-color: $main-color;
+                }
             }
 
             &-items{
@@ -54,25 +117,48 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                height: 2rem;
-                width: 15rem;
+                height: 100%;
+                margin-left: 2rem;
+                margin-right: 2rem;
                 font-size: 1.5rem;
                 text-align: center;
+                font-weight: bold;
 
                 &.active{
-                    font-weight: bold;
-                    font-size: 1.8rem;
                     color: $main-color;
+
+                    .counting{
+                        background-color: $main-color;
+                        font-weight: none;
+                        font-size:1.5rem;
+                    }
                 }
 
                 &:hover{
-                    font-weight: bold;
-                    font-size: 1.8rem;
+                    color: $main-color;
                     cursor: pointer;
+
+                    .counting{
+                        font-weight: none;
+                        font-size:1.5rem;
+                    }
                 }
 
                 .icon{
                     margin-right: 0.5rem;
+                }
+
+                .counting{
+                    background-color: #c4c4c4;
+                    width: 3rem;
+                    height: 3rem;
+                    border-radius: 1rem;
+                    margin-left: 0.5rem;
+                    color: #fff;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 1.5rem;
                 }
             }
 
@@ -154,7 +240,7 @@
 
         .table__content{
             position: relative;
-            margin-top: 2rem;
+            // margin-top: 2rem;
             height: 25rem;
             border-top: 1px solid #c4c4c4;
             padding: 1rem 2rem;
@@ -225,7 +311,7 @@
                 }
 
                 &::-webkit-scrollbar{
-                    width: 12px;
+                    width: 10px;
                     background-color: #F5F5F5;
                 }
 

@@ -51,6 +51,7 @@ export default class Body extends Component {
         }else{
             this.setState({
                 ...this.state,
+                isShow: false,
                 isLoading: true,
             }, () => {
                 getData(this.state.inputValue)
@@ -63,10 +64,6 @@ export default class Body extends Component {
                     refereesList: data?.referees || [],
                     competitionsList: data?.competitions || [],
                   }, () => {
-                      this.setState({
-                          ...this.state,
-                          isLoading: false,
-                      });
                       console.log('stop loading');
                       this.checkCount(data);
                     })
@@ -83,6 +80,7 @@ export default class Body extends Component {
               this.setState({
                   ...this.state,
                   isShow: true,
+                  isLoading: false,
               })
           }
       }
