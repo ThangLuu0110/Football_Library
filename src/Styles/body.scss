@@ -1,360 +1,357 @@
-.body{
-    width: 80%;
-    min-height: 0rem;
-    padding: 2rem;
-    background-color: #fff;
-    border-radius: 1rem;
-    transition: height 1s ease;
+.body {
+  width: 80%;
+  min-height: 0rem;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 1rem;
+  transition: height 1s ease;
 
-    &__loading{
-        width: 100%;
-        height: 20rem;
+  &__loading {
+    width: 100%;
+    height: 20rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .loading__spinner {
+      position: relative;
+      width: 5rem;
+      height: 5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 7px solid $main-color;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation-name: loadingSpin;
+      animation-duration: 1000ms;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+
+      &-ball {
+        position: absolute;
+        width: 2.5rem;
+        height: 2.5rem;
+        background-color: $main-color;
+        border-radius: 50%;
+      }
+    }
+
+    @keyframes loadingSpin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  &__search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+
+    &-input {
+      width: 70%;
+      height: 5rem;
+      flex-grow: 1;
+      margin: 1rem 2rem;
+      outline: none;
+      border: hidden;
+      font-size: 2.5rem;
+    }
+
+    &-button {
+      border-radius: 50%;
+      height: 5rem;
+      width: 5rem;
+      margin-right: 2rem;
+      border: none;
+      font-size: 1.5rem;
+      color: #fff;
+      background-color: $main-color;
+      cursor: pointer;
+
+      &:hover {
+        color: $main-color;
+        background-color: #fff;
+        border: 2px solid $main-color;
+      }
+    }
+  }
+
+  &__table {
+    .table__title {
+      margin-top: 2rem;
+      position: relative;
+
+      &-list {
+        height: 5rem;
+        width: 65%;
+        display: flex;
+        overflow: auto;
+        white-space: nowrap;
+
+        &::-webkit-scrollbar-track {
+          -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+          border-radius: 10px;
+          background-color: #f5f5f5;
+        }
+
+        &::-webkit-scrollbar {
+          height: 0.5rem;
+          background-color: #f5f5f5;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          border-radius: 10px;
+          -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+          background-color: $main-color;
+        }
+      }
+
+      &-items {
+        color: #939dad;
         display: flex;
         justify-content: center;
         align-items: center;
+        height: 100%;
+        margin-left: 2rem;
+        margin-right: 2rem;
+        font-size: 1.5rem;
+        text-align: center;
+        font-weight: bold;
 
-        .loading__spinner{
-            position: relative;
-            width: 5rem;
-            height: 5rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 7px solid $main-color;
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation-name: loadingSpin;
-            animation-duration: 1000ms;
-            animation-iteration-count: infinite;
-            animation-timing-function: linear; 
-    
-            &-ball{
-                position: absolute;
-                width: 2.5rem;
-                height: 2.5rem;
-                background-color: $main-color;
-                border-radius: 50%;
-            }
+        &.active {
+          color: $main-color;
+
+          .counting {
+            background-color: $main-color;
+            font-weight: none;
+            font-size: 1.5rem;
+          }
         }
-    
-        @keyframes loadingSpin {
-            from{
-              transform: rotate(0deg);
-            }
-            to {
-              transform: rotate(360deg);
-            }
+
+        &:hover {
+          color: $main-color;
+          cursor: pointer;
+
+          .counting {
+            font-weight: none;
+            font-size: 1.5rem;
+          }
         }
+
+        .icon {
+          margin-right: 0.5rem;
+        }
+
+        .counting {
+          background-color: #c4c4c4;
+          width: 3rem;
+          height: 3rem;
+          border-radius: 1rem;
+          margin-left: 0.5rem;
+          color: #fff;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 1.5rem;
+        }
+      }
+
+      .settings {
+        position: absolute;
+        right: 2.5rem;
+        top: calc(50% - 2rem);
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.5rem;
+        color: $main-color;
+
+        &.clicked {
+          border: 1px solid $main-color;
+          animation-name: spin;
+          animation-duration: 0.8s;
+        }
+
+        &.unclicked {
+          animation-name: respin;
+          animation-duration: 0.8s;
+        }
+
+        @keyframes spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(45deg);
+          }
+        }
+        @keyframes respin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(-45deg);
+          }
+        }
+      }
+
+      .underline {
+        position: absolute;
+        height: 2px;
+        background-color: $main-color;
+        bottom: -2rem;
+        transition: all 0.2s linear;
+        width: 15rem;
+
+        // &.all{
+        //     left: 0;
+        // }
+
+        // &.competition{
+        //     left: 15rem;
+        // }
+
+        // &.club{
+        //     left: 30rem;
+        // }
+
+        // &.player{
+        //     left: 45rem;
+        // }
+
+        // &.coach{
+        //     left: 60rem;
+        // }
+
+        // &.referee{
+        //     left: 75rem;
+        // }
+      }
     }
 
-    &__search{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #fff;
+    .table__content {
+      position: relative;
+      // margin-top: 2rem;
+      height: 25rem;
+      border-top: 1px solid #c4c4c4;
+      padding: 1rem 2rem;
 
-        &-input{
-            height: 5rem;
-            flex-grow: 1;
-            margin: 1rem 2rem;
-            outline: none;
-            border: hidden;
-            font-size: 2.5rem;
-        }
-        
-        &-button{
-            border-radius: 50%;
-            height: 5rem;
-            width: 5rem;
-            margin-right: 2rem;
-            border: none;
+      .setting-box {
+        position: absolute;
+        background-color: #fff;
+        border: 1px solid $main-color;
+        top: 0.5rem;
+        right: 1.8rem;
+        width: 18rem;
+        height: 24rem;
+        border-radius: 1.5rem;
+        padding: 1rem;
+
+        &__items {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1rem;
+
+          &-text {
             font-size: 1.5rem;
-            color: #fff;
+            list-style: 2rem;
+            font-weight: bold;
+
+            &.off {
+              color: #c4c4c4;
+            }
+          }
+
+          &-switch {
             background-color: $main-color;
+            width: 3.5rem;
+            height: 2rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+
+            &.off {
+              background-color: #c4c4c4;
+
+              .button {
+                transition: all 0.1s ease;
+                transform: translate(1.5rem);
+              }
+            }
+
+            .button {
+              background-color: #fff;
+              height: 1.8rem;
+              width: 1.8rem;
+              margin-left: 0.1rem;
+              border-radius: 50%;
+            }
+          }
+        }
+      }
+
+      &-page {
+        height: 100%;
+        overflow: auto;
+
+        &::-webkit-scrollbar-track {
+          -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+          border-radius: 10px;
+          background-color: #f5f5f5;
+        }
+
+        &::-webkit-scrollbar {
+          width: 10px;
+          background-color: #f5f5f5;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          border-radius: 10px;
+          -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+          background-color: $main-color;
+        }
+
+        .list {
+          &__items {
+            height: 10rem;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
             cursor: pointer;
 
-            &:hover{
-                color: $main-color;
-                background-color: #fff;
-                border: 2px solid $main-color;
-            }
-        }
-    }
+            &-logo {
+              height: 90%;
+              margin-right: 2rem;
 
-    &__table{
-
-        .table__title{
-            margin-top: 2rem;
-            position: relative;
-            
-            &-list{
-                height: 5rem;
-                width: 90%;
-                display: flex;
-                overflow: auto;
-                white-space: nowrap;
-
-                &::-webkit-scrollbar-track{
-                    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-                    border-radius: 10px;
-                    background-color: #F5F5F5;
-                }
-
-                &::-webkit-scrollbar{
-                    height: 0.5rem;
-                    background-color: #F5F5F5;
-                }
-
-                &::-webkit-scrollbar-thumb{
-                    border-radius: 10px;
-                    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-                    background-color: $main-color;
-                }
-            }
-
-            &-items{
-                color: #939dad;
-                display: flex;
-                justify-content: center;
-                align-items: center;
+              img {
                 height: 100%;
-                margin-left: 2rem;
-                margin-right: 2rem;
-                font-size: 1.5rem;
-                text-align: center;
+                object-fit: contain;
+              }
+            }
+
+            &-text {
+              .heading {
+                font-size: 2rem;
                 font-weight: bold;
+              }
 
-                &.active{
-                    color: $main-color;
-
-                    .counting{
-                        background-color: $main-color;
-                        font-weight: none;
-                        font-size:1.5rem;
-                    }
-                }
-
-                &:hover{
-                    color: $main-color;
-                    cursor: pointer;
-
-                    .counting{
-                        font-weight: none;
-                        font-size:1.5rem;
-                    }
-                }
-
-                .icon{
-                    margin-right: 0.5rem;
-                }
-
-                .counting{
-                    background-color: #c4c4c4;
-                    width: 3rem;
-                    height: 3rem;
-                    border-radius: 1rem;
-                    margin-left: 0.5rem;
-                    color: #fff;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 1.5rem;
-                }
+              .adding {
+                font-size: 1.2rem;
+              }
             }
-
-            .settings{
-                position: absolute;
-                right: 2.5rem;
-                top: calc(50% - 2rem);
-                width: 4rem;
-                height: 4rem;
-                border-radius: 50%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-size: 2.5rem;
-                color: $main-color;
-
-                &.clicked{
-                    border: 1px solid $main-color;
-                    animation-name: spin;
-                    animation-duration: 0.8s;
-                }
-
-                &.unclicked{
-                    animation-name: respin;
-                    animation-duration: 0.8s;
-                }
-
-                @keyframes spin {
-                    from {
-                        transform: rotate(0deg);
-                    }
-                    to{
-                        transform: rotate(45deg)
-                    }
-                }
-                @keyframes respin {
-                    from {
-                        transform: rotate(0deg)
-                    }
-                    to{
-                        transform: rotate(-45deg);
-                    }
-                }
-            }
-
-            .underline{
-                position: absolute;
-                height: 2px;
-                background-color: $main-color;
-                bottom: -2rem;
-                transition: all 0.2s linear;
-                width: 15rem;
-
-                // &.all{
-                //     left: 0;
-                // }
-
-                // &.competition{
-                //     left: 15rem;
-                // }
-
-                // &.club{
-                //     left: 30rem;
-                // }
-
-                // &.player{
-                //     left: 45rem;
-                // }
-
-                // &.coach{
-                //     left: 60rem;
-                // }
-
-                // &.referee{
-                //     left: 75rem;
-                // }
-            }
+          }
         }
-
-        .table__content{
-            position: relative;
-            // margin-top: 2rem;
-            height: 25rem;
-            border-top: 1px solid #c4c4c4;
-            padding: 1rem 2rem;
-
-            .setting-box{
-                position: absolute;
-                background-color: #fff;
-                border: 1px solid $main-color;
-                top: 0.5rem;
-                right: 1.8rem;
-                width: 18rem;
-                height: 24rem;
-                border-radius: 1.5rem;
-                padding: 1rem;
-
-                &__items{
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 1rem;
-
-                    &-text{
-                        font-size: 1.5rem;
-                        list-style: 2rem;
-                        font-weight: bold;
-
-                        &.off{
-                            color: #c4c4c4;
-                        }
-                    }
-
-                    &-switch{
-                        background-color: $main-color;
-                        width: 3.5rem;
-                        height: 2rem;
-                        border-radius: 1rem;
-                        display: flex;
-                        align-items: center;
-
-                        &.off{
-                            background-color: #c4c4c4;
-
-                            .button{
-                                transition: all 0.1s ease;
-                                transform: translate(1.5rem);
-                            }
-                        }
-
-                        .button{
-                            background-color: #fff;
-                            height: 1.8rem;
-                            width: 1.8rem;
-                            margin-left: 0.1rem;
-                            border-radius: 50%;
-                        }
-                    }
-                }
-            }
-
-            &-page{
-                height: 100%;
-                overflow: auto;
-                
-                &::-webkit-scrollbar-track{
-                    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-                    border-radius: 10px;
-                    background-color: #F5F5F5;
-                }
-
-                &::-webkit-scrollbar{
-                    width: 10px;
-                    background-color: #F5F5F5;
-                }
-
-                &::-webkit-scrollbar-thumb{
-                    border-radius: 10px;
-                    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-                    background-color: $main-color;
-                }
-
-                .list{
-
-                    &__items{
-                        height: 10rem;
-                        display: flex;
-                        align-items: center;
-                        padding: 0.5rem;
-                        cursor: pointer;
-
-                        &-logo{
-                            height: 90%;
-                            margin-right: 2rem;
-
-                            img{
-                                height: 100%;
-                                object-fit: contain;
-                            }
-                        }  
-
-                        &-text{
-
-                            .heading{
-                                font-size: 2rem;
-                                font-weight: bold;
-                            }
-
-                            .adding{
-                                font-size: 1.2rem;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+      }
     }
-
+  }
 }

@@ -1,30 +1,30 @@
-export interface DataPlayers{
-    id: number;
-    playerName: string;
-    club: string;
-    playerImage: string;
-  }
-export interface DataClubs{
+export interface DataPlayers {
+  id: number;
+  playerName: string;
+  club: string;
+  playerImage: string;
+}
+export interface DataClubs {
   id: string;
   competitionName: string;
   name: string;
   logoImage: string;
 }
-export  interface DataCoaches{
+export interface DataCoaches {
   id: string;
   coachName: string;
   currentFunction: string;
-  coachImage: string
+  coachImage: string;
 }
 
-export interface DataReferrees{
+export interface DataReferrees {
   id: string;
   club: string;
   refereeName: string;
   refereeImage: string;
 }
 
-export interface DataCompetitions{
+export interface DataCompetitions {
   id: string;
   competitionName: string;
   country: string;
